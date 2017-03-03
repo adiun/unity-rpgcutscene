@@ -10,6 +10,11 @@ Simple Unity3D cutscene sequencer with RPG-style animated paged dialog support
 * Support for instantiating prefabs
 * Showing RPG-style paged, docked dialogs with animating text, reading time, and next-page button support
 
+## Who this is for?
+
+Mainly for game devs who want to add quick, simple 2D RPG-style cutscenes without importing a package with a ton of assets. If all you want is a cutscene runner with basic support for waiting on user input, instantiating prefabs, and dialog support then this is for you. FYI: a unitypackage is a WIP. 
+
+If you want full cinematic, 3D cutscene support with a great editor check out the [Cinema Director](https://www.assetstore.unity3d.com/en/#!/content/19779) asset.
 
 ## Setup
 
@@ -83,7 +88,7 @@ When implementing your own `CustceneActions` - just remember to call the `finish
 `CutscenePrefabs` is a `Monobehaviour` that acts like a ResourceDictionary in XAML - attach your prefabs to it in the Inspector at edit-time (with unique IDs) so that they will be ready to load at runtime in the game. This is to avoid the slow performance of Resources.Load. 
 
 You can use the `InstantiatePrefabAction` to load these into your cutscene:
-```
+```c#
 var cutscene = new Cutscene() {
   new InstantiatePrefabAction("CutsceneSpaceship", "CutsceneSpaceship", Vector3.zero, Quaternion.identity)
 };
