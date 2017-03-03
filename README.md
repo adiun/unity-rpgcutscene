@@ -1,8 +1,7 @@
-# unity-rpgcutscene
 Simple Unity3D cutscene sequencer with RPG-style animated paged dialog support
 
-Features
-----------
+## Features
+
 * Declarative cutscene creation
 * Completion notifications
 * Ability to run coroutines within cutscene actions
@@ -10,8 +9,8 @@ Features
 * Showing RPG-style paged, docked dialogs with animating text, reading time, and next-page button support
 
 
-Setup
------------
+## Setup
+
 1. Create a Unity Canvas to hold the dialog, e.g. `CutsceneCanvas`.
 1. Attach the `Cutscene Controller` script component to it.
 1. Create an empty GameObject under `CutsceneCanvas` to hold your prefabs: e.g. `CutscenePrefabs`.
@@ -23,8 +22,8 @@ Setup
 1. Add any prefabs you will instantiate (with ids) for `Cutscene Prefabs`.
 
 
-Basic Usage
------------
+## Basic Usage
+
 Create a cutscene:
 ```c#
 var cutscene = new Cutscene() {
@@ -44,15 +43,15 @@ cutsceneController.RunCutscene(cutscene, () => {
 ```
 
 
-How it Works
-------------
+## How it Works
+
 The `CutsceneController` is the main API to interact with. Internally it uses a `CutsceneQueue`. The `CutsceneQueue` is just a runner for the `Cutscene` and also accepts a `CutsceneQueueContext` that should provide completion actions and can also provide coroutine start/stop functionality (provided by `MonoBehaviour`).
 
 The paged dialog support reuses the `CutsceneQueue`. Within a CutsceneAction, dialog is split into N pages depending on how long it is (and how big the `DialogText` game object is) and a queue of N actions is created. The next button fires an event that navigates to the next action in the internal queue.
 
+## Feature Details
 
-Declarative Cutscene Creation
------------------------------
+### Declarative Cutscene Creation
 Check out [`IntroCutscene.cs`](https://github.com/adiun/unity-rpgcutscene/blob/master/IntroCutscene.cs) to see how to set this up. Here is an example:
 
 ```c#
@@ -69,20 +68,17 @@ return new Cutscene() {
 ```
 
 
-Completion Notifications
-------------------------
+### Completion Notifications
 Completion notification of a `CutsceneQueue` can be provided through the `CutsceneQueueContext`. 
 
 There are also completion notifications for individual `CutsceneActions`. 
 
 
-Coroutines within CutsceneActions
----------------------------------
+### Coroutines within CutsceneActions
 When implementing your own `CustceneActions` - just remember to call the `finish()` Action parameter after your logic is finished in `Run()`. `finish()` is not automatically called - this is to support coroutines. See `WaitAction` in [`CutsceneActions.cs`](https://github.com/adiun/unity-rpgcutscene/blob/master/CutsceneActions.cs) for an example.
 
 
-Prefab Instantiation
---------------------
+### Prefab Instantiation
 `CutscenePrefabs` is a `Monobehaviour` that acts like a ResourceDictionary in XAML - attach your prefabs to it in the Inspector at edit-time (with unique IDs) so that they will be ready to load at runtime in the game. This is to avoid the slow performance of Resources.Load. 
 
 You can use the `InstantiatePrefabAction` to load these into your cutscene:
@@ -93,8 +89,7 @@ var cutscene = new Cutscene() {
 ```
 
 
-RPG-style paged, animating dialogs
-----------------------------------
+### RPG-style paged, animating dialogs
 You only need a `Text` within a `Panel` in a `Canvas` (see Basic Usage section above) to set this up. Next page button is optional.
 
 * `ShowDialogAction(bool)` shows and hides the `Panel`. 
@@ -105,8 +100,7 @@ You only need a `Text` within a `Panel` in a `Canvas` (see Basic Usage section a
 * Each `DialogPage` has a reading time that is computed based on the length of the text. See [`CutsceneController.DialogPage.cs`](https://github.com/adiun/unity-rpgcutscene/blob/master/CutsceneController.DialogPage.cs)
 
 
-Future features
----------------
+## Future features
 * Support for concurrent `CutsceneActions`
 * UnityPackage support
 * Migrating tests into this package
