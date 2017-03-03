@@ -12,7 +12,7 @@ Simple Unity3D cutscene sequencer with RPG-style animated paged dialog support
 
 ## Who this is for?
 
-Mainly for game devs who want to add quick, simple 2D RPG-style cutscenes without importing a package with a ton of assets. If all you want is a cutscene runner with basic support for waiting on user input, instantiating prefabs, and dialog support then this is for you. FYI: a unitypackage is a WIP. 
+Mainly for game devs who want to add quick, simple 2D RPG-style cutscenes without importing a package with a ton of assets. If all you want is a cutscene runner with basic support for waiting on user input, instantiating prefabs, and dialog support then this is for you. *FYI: a unitypackage is a work-in-progress*. 
 
 If you want full cinematic, 3D cutscene support with a great editor check out the [Cinema Director](https://www.assetstore.unity3d.com/en/#!/content/19779) asset.
 
