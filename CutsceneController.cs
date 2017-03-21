@@ -83,11 +83,13 @@ public class CutsceneController
         var currentText = text;
         var visibleText = text;
         List<DialogPage> dialogPages = new List<DialogPage>();
+        var generationSettings = dialogText.GetGenerationSettings(dialogText.rectTransform.rect.size);
         do {
-            textGenerator.Populate(currentText, dialogText.GetGenerationSettings(dialogText.rectTransform.rect.size));
-            visibleText = currentText.Substring(0, textGenerator.characterCountVisible);
+            textGenerator.Populate(currentText, generationSettings);
+            var visibleCharCount = textGenerator.characterCountVisible;
+            visibleText = currentText.Substring(0, visibleCharCount);
             dialogPages.Add(new DialogPage(visibleText));
-            currentText = text.Substring(visibleText.Length);
+            currentText = currentText.Substring(visibleText.Length);
         } while (currentText.Length > 0);
         return dialogPages;
     }
